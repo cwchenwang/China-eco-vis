@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chinese Economics</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="resources/favicon.ico" />
+    <script src="scripts/d3.min.js"></script>
+    <script src="scripts/d3-geo-projection.min.js"></script>
+</head>
+
+<body>
+    <svg width="1600" height="800" id="mainsvg" class="svgs" style='display: block; margin: 0 auto;'></svg>
+    <script>
+        const width = 1200;
+        const height = 600;
+        const minValue = 56095;
+        const maxValue = 1337705000;
+        const svg = d3.select('svg');
+        const paletteScale = d3.scaleLinear()
+            .domain([minValue, maxValue])
+            .range(['#EFEFFF', '#CF4646']);
+
+        var selectedLayer = svg.append('g').attr('class', 'selected-countries');
+        var layer = svg.append('g').attr('class', 'countries');
+
+        let geo, geoData, boundaries;
+        const dataLoadandSetup = async function () {
+            geo = await d3.json('data/worldmap/geoData.geojson');
+            //console.log(geo.features);
+            geoData = geo.features;
+            boundaries = await d3.json('data/worldmap/boundaries.json');
+        }
+
+        const render = async function () {
+            await dataLoadandSetup();
+
+            const projection = d3.geoMercator()
+                .fitSize([width, height], geo)
+                .scale(200)
+            // .translate([width, height]);
+            // console.log(projection([116.418757, 39.917544]));
+            const path = d3.geoPath().projection(projection);
+
+            // zooming
+            const zoomed = ({ transform }) => {
+                layer.attr('transform', transform);
+                selectedLayer.attr('transform', transform);
+            };
+            svg.call(d3.zoom().scaleExtent([0.5, 40]).on('zoom', zoomed));
+            // draw world map
+            layer.selectAll('path')
+                .data(geoData, (d) => d.id)
+                .join(
+                    enter => {
+                        enter
+                            .append('path')
+                            .attr('class', (d) => `country ${d.id}`)
+                            .attr('d', path)
+                            .style('fill', (d) => d.properties.fillColor)
+                            .style('stroke', 'none');
+                    },
+                    () => { },
+                    exit => {
+                        exit
+                            .remove();
+                    },
+                );
+            // draw boundaries
+            layer.selectAll('.country-boundary')
+                .data([boundaries])
+                .join(
+                    enter => {
+                        enter
+                            .append('path')
+                            .attr('d', path)
+                            .attr('class', 'country-boundary')
+                            .style('stroke', 'black')
+                            .style('stroke-width', 1)
+                            .style('stroke-opacity', 0.3)
+                            .style('fill', 'none');
+                    },
+                    () => { },
+                    exit => {
+                        exit.remove()
+                    }
+                );
+        }
+        render();
+    </script>
+</body>
