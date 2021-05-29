@@ -7,11 +7,22 @@
     <link rel="shortcut icon" type="image/x-icon" href="resources/favicon.ico" />
     <script src="scripts/d3.min.js"></script>
     <script src="scripts/d3-geo-projection.min.js"></script>
+    <!-- <script src="scripts/pie-chart.js"></script> -->
 </head>
 
 <body>
     <p style='font-size: 20pt; text-align: center;'>China Global Trade Visualization</p>
-    <svg width="800" height="400" id="world-race-svg" class="svgs" style='display: block;'></svg>
+    <div style="display: block; height: 400px; margin: 20px;">
+        <svg width="800" height="400" id="world-race-svg" class="svgs"></svg>
+        <div style="display: inline-block; height:400px; width: 500px; vertical-align: bottom;">
+            <div class="button-switch" style="margin-top: 30px;">
+                <button id="import-btn" class="button">Import</button>
+                <button id="export-btn" class="button">Export</button>
+            </div>
+            <svg width="500" height="300" id="world-pie-svg" class="svgs"></svg>
+            <!-- <p style="text-align: center; margin: 0; margin-bottom: 20px; font-size: 30px;">Region</p> -->
+        </div>
+    </div>
     <svg width="1000" height="600" id="world-map-svg" class="svgs" style='display: block; margin: 0 auto;'></svg>
     <script>
         const width = 1200;
@@ -23,7 +34,7 @@
         const worldMapSvg = d3.select('#world-map-svg');
 
 
-        let geo, geoData, boundaries, monthData;
+        let geo, geoData, boundaries, monthData, regionData;
         const dataLoadandSetup = async function () {
             geo = await d3.json('data/worldmap/geoData.geojson');
             //console.log(geo.features);
@@ -31,7 +42,8 @@
             console.log(geo.features);
             boundaries = await d3.json('data/worldmap/boundaries.json');
             monthData = await d3.csv('data/worldmap/global-by-month.csv');
-            console.log(monthData);
+            //console.log(monthData);
+            regionData = await d3.csv('data/worldmap/global-by-region.csv');
         }
 
         async function renderBarRacing(data) {
@@ -46,7 +58,7 @@
             let xAxis = d3.axisBottom(xScale);
             let yAxis = d3.axisLeft(yScale);
 
-            const margin = { top: 60, right: 60, bottom: 60, left: 100 };
+            const margin = { top: 30, right: 60, bottom: 60, left: 100 };
             const width = barSvg.attr('width');
             const height = barSvg.attr('height');
             const innerWidth = width - margin.left - margin.right;
@@ -157,6 +169,90 @@
             //}
         }
 
+        async function renderPieChart() {
+            const pieWidth = 250,
+                pieHeight = 250,
+                radius = Math.min(pieWidth, pieHeight) / 2
+
+            const pie = d3.pie()
+                .value(d => d.value);
+
+            const arc = d3.arc()
+                .outerRadius(radius)
+                .innerRadius(0);
+
+            var pieSvg = d3.select("#world-pie-svg");
+            g = pieSvg.append("g")
+                .attr("transform", "translate(" + (pieSvg.attr('width') / 2 - 50) + "," + (pieSvg.attr('height') / 2 + 15) + ")");
+
+            console.log(regionData);
+            const pieSp = d3.scalePoint().
+                domain(regionData.map(d => d.region)).range([0, 1]);
+
+            regionData = d3.group(regionData, d => d.dirs);
+            console.log(regionData);
+
+            var arcs = g.selectAll("arc")
+                .data(pie(regionData.get("Import")))
+                .enter().append("g")
+                .attr("class", "arc")
+                .on('mouseover', function (d, i) {
+                    d3.select(this).transition()
+                        .duration('50')
+                        .attr('opacity', '.8');
+                })
+                .on('mouseout', function (d, i) {
+                    d3.select(this).transition()
+                        .duration('50')
+                        .attr('opacity', '1');
+                })
+                .attr('transform', 'translate(0, 0)');
+
+            arcs.append("path")
+                .attr("d", arc)
+                .style("fill", d => d3.interpolateSpectral(pieSp(d.data.region)));
+
+            var legend = pieSvg
+                .selectAll("text")
+                .attr("class", "legend")
+                .data(regionData.get("Import"))
+                .enter().append("g")
+                .attr("transform", function (d, i) { return "translate(" + 350 + "," + (i * 22 + 60) + ")"; });
+
+            legend.append("rect")
+                .attr("width", 18)
+                .attr("height", 18)
+                .style("fill", (d, i) => d3.interpolateSpectral(pieSp(d.region)));
+
+            legend.append("text")
+                .attr("x", 24)
+                .attr("y", 9)
+                .attr("dy", ".35em")
+                .text(d => d.region);
+
+            document.getElementById('import-btn').style.background = '#bdbdbd';
+            function changeData(data) {
+                path = d3.select("#world-pie-svg")
+                    .selectAll("path")
+                    .data(pie(data)); // Compute the new angles
+                path.transition().duration(500).attr("d", arc);
+            }
+
+            d3.select("button#import-btn")
+                .on("click", function () {
+                    console.log("click import");
+                    changeData(regionData.get("Import"));
+                    document.getElementById('import-btn').style.background = '#bdbdbd';
+                    document.getElementById('export-btn').style.background = '#000000';
+                })
+            d3.select("button#export-btn")
+                .on("click", function () {
+                    changeData(regionData.get("Export"));
+                    document.getElementById('import-btn').style.background = '#000000';
+                    document.getElementById('export-btn').style.background = '#bdbdbd';
+                })
+        }
+
         async function renderMap() {
             const paletteScale = d3.scaleLinear()
                 .domain([minValue, maxValue])
@@ -219,6 +315,7 @@
             await dataLoadandSetup();
 
             renderBarRacing(monthData);
+            renderPieChart();
             renderMap();
 
         }

@@ -5,11 +5,29 @@
 }
 
 .axis-label {
-    font-weight: bold;
-    font-size: 1em;
+  font-weight: bold;
+  font-size: 1em;
 }
 
 .value-label {
   font-size: 10px;
   font-weight: bold;
+}
+
+.button-switch {
+  display: flex; 
+  justify-content: center; 
+  margin: 0 auto;
+}
+
+.button {
+  background-color: #000000;
+  border: none;
+  color: white;
+  padding: 5px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  height: 40px;
 }
