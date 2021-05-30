@@ -38,6 +38,7 @@
         const barSvg = d3.select('#world-race-svg');
         const worldMapSvg = d3.select('#world-map-svg');
 
+        const formatFloat = d3.format(".2f");
 
         let geo, geoData, boundaries, wholeMonthData, regionData, countries;
         const dataLoadandSetup = async function () {
@@ -59,7 +60,6 @@
             const yScale = d3.scaleBand();
             const sp = d3.scalePoint();
             const colorScale = d3.scaleOrdinal();
-            const formatFloat = d3.format(".2f");
 
             let xAxis = d3.axisBottom(xScale);
             let yAxis = d3.axisLeft(yScale);
@@ -190,7 +190,7 @@
                 const meanValue = meanData.get(country.properties.name);
                 if (typeof meanValue != 'undefined') {
                     const average = arr => arr.reduce((p, c) => { return parseFloat(p.number) + parseFloat(c.number) }) / arr.length;
-                    const result = average(meanValue);
+                    const result = formatFloat(average(meanValue));
                     return {
                         ...country,
                         properties: {
@@ -207,7 +207,7 @@
                 return {
                     ...country,
                     properties: {
-                        total: 0,
+                        total: "No data available",
                         fillColor: fill,
                         name: country.properties.name,
                     }
@@ -267,6 +267,42 @@
                         exit.remove()
                     }
                 );
+            var tooltipSelection = d3.select('body')
+                .append('div')
+                .attr('class', 'hover-info')
+                .style('visibility', 'hidden');
+
+            d3.selectAll(".country")
+                .on('mouseenter', ({ target }) => {
+                    tooltipSelection.style('visibility', 'visible');
+                    d3.select(target)
+                        .transition()
+                        .duration(150)
+                        .ease(d3.easeCubic)
+                        .style('fill', '#ffba08');
+                })
+                .on('mousemove', ({ pageX, pageY, target }) => {
+                    tooltipSelection
+                        .style('top', `${pageY + 20}px`)
+                        .style('left', `${pageX - 10}px`)
+                        .style('z-index', 100)
+                        .html(
+                            `<strong>${target.__data__.properties.name
+                            }</strong><br>Total Value: <br><strong>${target.__data__.properties.total
+                            } Mn</strong>`,
+                        )
+                        .append('div')
+                        .attr('class', 'triangle');
+                    d3.selectAll('.triangle').style('top', `${-Math.sqrt(20) - 3}px`);
+                })
+                .on('mouseleave', (e) => {
+                    tooltipSelection.style('visibility', 'hidden');
+                    d3.select(e.target)
+                        .transition()
+                        .duration(150)
+                        .ease(d3.easeCubic)
+                        .style('fill', (d) => d.properties.fillColor);
+                });
         }
         const render = async function () {
             await dataLoadandSetup();
