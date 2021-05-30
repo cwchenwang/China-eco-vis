@@ -1,0 +1,477 @@
+country,dir,time,number
+Afghanistan,Export,Mean,316.2570725
+Bahrain,Export,Mean,639.8841518
+Bangladesh,Export,Mean,9592.909224
+Bhutan,Export,Mean,23.1651571
+Brunei,Export,Mean,253.9339626
+Myanmar,Export,Mean,7536.105778
+Cambodia,Export,Mean,4928.852034
+Cyprus,Export,Mean,431.3445495
+North Korea,Export,Mean,146.3766732
+Hong Kong SAR (China),Export,Mean,175935.7231
+India,Export,Mean,46270.06177
+Indonesia,Export,Mean,27081.10962
+Iran,Export,Mean,4499.340258
+Iraq,Export,Mean,6304.161295
+Israel,Export,Mean,7165.240681
+Japan,Export,Mean,85666.45577
+Jordan,Export,Mean,1975.296481
+Kuwait,Export,Mean,2204.669313
+Laos,Export,Mean,959.2811704
+Lebanon,Export,Mean,637.3326173
+Macau SAR (China),Export,Mean,1327.143053
+Malaysia,Export,Mean,37405.23297
+Maldives,Export,Mean,171.0759538
+Mongolia,Export,Mean,1103.111978
+Nepal,Export,Mean,787.6836541
+Oman,Export,Mean,2024.091734
+Pakistan,Export,Mean,9801.777498
+Palestine,Export,Mean,61.9761275
+Philippines,Export,Mean,28075.77206
+Qatar,Export,Mean,1680.895449
+Saudi Arabia,Export,Mean,17096.44335
+Singapore,Export,Mean,32778.2224
+South Korea,Export,Mean,70369.13108
+Sri Lanka,Export,Mean,2470.111124
+Syrian Arab Rep.,Export,Mean,413.1974688
+Thailand,Export,Mean,32654.48813
+Turkey,Export,Mean,12902.5053
+United Arab Emirates,Export,Mean,20142.68998
+Yemen,Export,Mean,1567.574597
+Vietnam,Export,Mean,74829.92852
+Taiwan,Export,Mean,37880.64785
+East Timor,Export,Mean,126.5646407
+Kazakhstan,Export,Mean,7910.899552
+Kyrgyzstan,Export,Mean,1707.229165
+Tajikistan,Export,Mean,605.5656112
+Turkmenistan,Export,Mean,291.0656564
+Uzbekistan,Export,Mean,3225.330151
+Other,Export,Mean,0.3052653
+Algeria,Export,Mean,3390.26309
+Angola,Export,Mean,1129.742443
+Benin,Export,Mean,605.2194947
+Botswana,Export,Mean,149.3123772
+Burundi,Export,Mean,53.0226607
+Cameroon,Export,Mean,1243.019743
+Canary Islands,Export,Mean,0.865038
+Cabo Verde,Export,Mean,40.7633845
+Central African Republic,Export,Mean,15.9293938
+Ceuta,Export,Mean,0.2271273
+Chad,Export,Mean,145.1306421
+Comoros,Export,Mean,33.4768634
+Republic of Congo,Export,Mean,396.5269826
+Djibouti,Export,Mean,1488.910615
+Egypt,Export,Mean,8399.7728
+Eq. Guinea,Export,Mean,76.8489665
+Ethiopia,Export,Mean,1296.065455
+Gabon,Export,Mean,257.845101
+Gambia,Export,Mean,316.2648657
+Ghana,Export,Mean,4307.083114
+Guinea,Export,Mean,1147.461019
+Guinea Bissau,Export,Mean,30.3277531
+Cote d'Ivoire,Export,Mean,1507.982552
+Kenya,Export,Mean,3447.933788
+Liberia,Export,Mean,1964.318142
+Libyan,Export,Mean,1035.995791
+Madagascar,Export,Mean,586.5686811
+Malawi,Export,Mean,136.0621983
+Mali,Export,Mean,291.1366934
+Mauritania,Export,Mean,448.8413685
+Mauritius,Export,Mean,438.2175888
+Morocco,Export,Mean,2547.087679
+Mozambique,Export,Mean,1250.650418
+Namibia,Export,Mean,146.9247889
+Niger,Export,Mean,135.052956
+Nigeria,Export,Mean,10720.73314
+Reunion,Export,Mean,125.2782013
+Rwanda,Export,Mean,179.6014045
+Sao Tome & Principe,Export,Mean,13.7832958
+Senegal,Export,Mean,1628.554203
+Seychelles,Export,Mean,31.0168658
+Sierra Leone,Export,Mean,237.2154104
+Somalia,Export,Mean,558.6130624
+South Africa,Export,Mean,10073.64355
+Western Sahara,Export,Mean,0.2494023
+Sudan,Export,Mean,1378.017186
+Tanzania,Export,Mean,2647.911574
+Togo,Export,Mean,1568.457396
+Tunisia,Export,Mean,924.7578192
+Uganda,Export,Mean,503.0862549
+Burkina Faso,Export,Mean,199.6055502
+Democratic of Congo,Export,Mean,1335.556599
+Zambia,Export,Mean,368.1921667
+Zimbabwe,Export,Mean,381.1137852
+Lesotho,Export,Mean,39.9189618
+Melilla,Export,Mean,0.220555
+Swaziland,Export,Mean,26.3936535
+Eritrea,Export,Mean,36.7254995
+Mayotte,Export,Mean,36.5965316
+South Sudan,Export,Mean,101.4165361
+Other,Export,Mean,1.7685455
+Belgium,Export,Mean,13543.38195
+Denmark,Export,Mean,4727.165879
+United Kingdom,Export,Mean,48370.5107
+Germany,Export,Mean,55188.43148
+France,Export,Mean,22946.50373
+Ireland,Export,Mean,2530.346302
+Italy,Export,Mean,20555.8488
+Luxembourg,Export,Mean,685.2428416
+Netherlands,Export,Mean,50471.1838
+Greece,Export,Mean,4536.480764
+Portugal,Export,Mean,2535.05388
+Spain,Export,Mean,17147.29401
+Albania,Export,Mean,333.3827967
+Andorra,Export,Mean,1.7004808
+Austria,Export,Mean,2158.257715
+Bulgaria,Export,Mean,950.1034727
+Finland,Export,Mean,1747.282497
+Gibraltar,Export,Mean,1.8657787
+Hungary,Export,Mean,4734.787752
+Iceland,Export,Mean,62.1425306
+Liechtenstein,Export,Mean,28.9024646
+Malta,Export,Mean,857.8085518
+Monaco,Export,Mean,13.662582
+Norway,Export,Mean,2241.461181
+Poland,Export,Mean,17885.11628
+Romania,Export,Mean,3172.245998
+San Marino,Export,Mean,3.9526189
+Sweden,Export,Mean,5249.559258
+Switzerland,Export,Mean,2873.727191
+Estonia,Export,Mean,529.4917612
+Latvia,Export,Mean,645.7178965
+Lithuania,Export,Mean,1083.402298
+Georgia,Export,Mean,695.7370024
+Armenia,Export,Mean,122.935564
+Azerbaijan,Export,Mean,368.0860831
+Belarus,Export,Mean,1434.102822
+Moldova,Export,Mean,88.1777737
+Russia,Export,Mean,32225.54172
+Ukraine,Export,Mean,4136.604732
+Slovenia,Export,Mean,2194.901862
+Croatia,Export,Mean,951.3540139
+Czech Republic,Export,Mean,8533.428886
+Slovakia,Export,Mean,2080.672286
+North Macedonia,Export,Mean,100.8425555
+Bosnia and Hercegovina,Export,Mean,64.8179568
+Vatican City State,Export,Mean,0.8115199
+Faroe Islands,Export,Mean,0.9281189
+Serbia,Export,Mean,1034.452913
+Montenegro,Export,Mean,61.3338584
+Other,Export,Mean,1.2887113
+Antigua & Barbuda,Export,Mean,58.1104578
+Argentina,Export,Mean,4752.462009
+Aruba,Export,Mean,21.5172974
+The Bahamas,Export,Mean,207.3465359
+Barbados,Export,Mean,66.4059677
+Belize,Export,Mean,60.7991959
+Bolivia,Export,Mean,410.7913152
+Bonaire,Export,Mean,0.0028268
+Brazil,Export,Mean,23918.53297
+Cayman Islands,Export,Mean,19.9835943
+Chile,Export,Mean,10386.49175
+Colombia,Export,Mean,6254.080035
+Dominica,Export,Mean,12.964958
+Costa Rica,Export,Mean,966.1665745
+Cuba,Export,Mean,284.1216112
+Curacao,Export,Mean,21.7367154
+Dominican Republic,Export,Mean,1593.545539
+Ecuador,Export,Mean,2091.833566
+French Guiana,Export,Mean,16.4041809
+Grenada,Export,Mean,7.8763246
+Guadeloupe,Export,Mean,28.7346
+Guatemala,Export,Mean,1613.414964
+Guyana,Export,Mean,170.0584298
+Haiti,Export,Mean,441.5640323
+Honduras,Export,Mean,589.5106453
+Jamaica,Export,Mean,390.73777
+Martinique,Export,Mean,17.2900619
+Mexico,Export,Mean,28730.94254
+Montserrat,Export,Mean,0.0468959
+Nicaragua,Export,Mean,318.8171411
+Panama,Export,Mean,5432.269809
+Paraguay,Export,Mean,749.352051
+Peru,Export,Mean,6072.426746
+Puerto Rico,Export,Mean,510.5556233
+Saba,Export,Mean,0.0040704
+Saint Lucia,Export,Mean,14.5436381
+Saint Martin (French),Export,Mean,2.9671104
+Saint Vincent and the Grenadines,Export,Mean,6.3619325
+El Salvador,Export,Mean,605.0673312
+Suriname,Export,Mean,130.9010699
+Trinidad & Tobago,Export,Mean,204.8421096
+Turks & Caicos Islands,Export,Mean,2.1068832
+Uruguay,Export,Mean,1132.641483
+Venezuela,Export,Mean,916.7391508
+British Virgin Islands,Export,Mean,4.4035341
+Saint Kitts and Nevis,Export,Mean,7.3393117
+St. Pierre & Miquelon,Export,Mean,0.2211719
+Netherlands Antilles,Export,Mean,8.1854556
+Other,Export,Mean,5.5994159
+Canada,Export,Mean,26905.3514
+United States,Export,Mean,293153.707
+Greenland,Export,Mean,1.0449855
+Bermuda,Export,Mean,26.1572035
+Other,Export,Mean,0.3927169
+Australia,Export,Mean,33553.2436
+Cook Islands,Export,Mean,1.8729055
+Fiji,Export,Mean,201.9727369
+Gambier Islands,Export,Mean,0.0032115
+Marquesas Islands,Export,Mean,7.56E-05
+Nauru,Export,Mean,1.8750321
+New Caledonia,Export,Mean,72.9273539
+Vanuatu,Export,Mean,44.426912
+New Zealand,Export,Mean,3990.728764
+Norfolk Islands,Export,Mean,1.2969657
+Papua New Guinea,Export,Mean,513.4018354
+Society Islands,Export,Mean,0.3231877
+Solomon Islands,Export,Mean,73.1821382
+Tonga,Export,Mean,21.3739069
+Tuamotu Islands,Export,Mean,9.12E-05
+Tubai Islands,Export,Mean,0.0987657
+Samoa,Export,Mean,51.8613367
+Kiribati,Export,Mean,15.2751216
+Tuvalu,Export,Mean,9.2745281
+Micronesia,Export,Mean,11.3643462
+Marshall Islands,Export,Mean,1981.971991
+Palau,Export,Mean,16.5975133
+French Polynesia,Export,Mean,64.4968583
+Wallis & Futuna,Export,Mean,0.5294799
+Other,Export,Mean,59.8283714
+Afghanistan,Import,Mean,43.7157677
+Bahrain,Import,Mean,84.9572816
+Bangladesh,Import,Mean,508.7615643
+Bhutan,Import,Mean,0.0165023
+Brunei,Import,Mean,911.3092421
+Myanmar,Import,Mean,4071.327437
+Cambodia,Import,Mean,1001.757474
+Cyprus,Import,Mean,18.2953927
+North Korea,Import,Mean,23.8016878
+Hong Kong SAR (China),Import,Mean,4736.227577
+India,Import,Mean,14675.30874
+Indonesia,Import,Mean,24743.1549
+Iran,Import,Mean,3474.133287
+Iraq,Import,Mean,10010.70379
+Israel,Import,Mean,3679.936764
+Japan,Import,Mean,108878.3416
+Jordan,Import,Mean,260.1401674
+Kuwait,Import,Mean,6234.106733
+Laos,Import,Mean,1327.213946
+Lebanon,Import,Mean,19.4706104
+Macau SAR (China),Import,Mean,37.2808169
+Malaysia,Import,Mean,47021.12131
+Maldives,Import,Mean,5.9998651
+Mongolia,Import,Mean,3584.150635
+Nepal,Import,Mean,12.2403995
+Oman,Import,Mean,9602.786402
+Pakistan,Import,Mean,1472.274924
+Palestine,Import,Mean,0.0055448
+Philippines,Import,Mean,12086.52695
+Qatar,Import,Mean,5590.584069
+Saudi Arabia,Import,Mean,22532.43577
+Singapore,Import,Mean,19555.172
+South Korea,Import,Mean,106357.797
+Sri Lanka,Import,Mean,214.8390811
+Syrian Arab Rep.,Import,Mean,0.5391078
+Thailand,Import,Mean,29607.8844
+Turkey,Import,Mean,2436.513892
+United Arab Emirates,Import,Mean,10801.54601
+Yemen,Import,Mean,317.5404848
+Vietnam,Import,Mean,50394.47078
+Taiwan,Import,Mean,127960.5605
+East Timor,Import,Mean,0.9668393
+Kazakhstan,Import,Mean,5528.254107
+Kyrgyzstan,Import,Mean,20.3751877
+Tajikistan,Import,Mean,25.8345555
+Turkmenistan,Import,Mean,3085.311623
+Uzbekistan,Import,Mean,925.9291476
+Other,Import,Mean,0.0110303
+Algeria,Import,Mean,366.9870973
+Angola,Import,Mean,8141.51623
+Benin,Import,Mean,70.7864142
+Botswana,Import,Mean,102.6865973
+Burundi,Import,Mean,5.1724436
+Cameroon,Import,Mean,592.4708196
+Canary Islands,Import,Mean,0.0342688
+Cabo Verde,Import,Mean,0.1797689
+Central African Republic,Import,Mean,30.8475625
+Ceuta,Import,Mean,0.0068544
+Chad,Import,Mean,272.5446601
+Comoros,Import,Mean,0.066087
+Republic of Congo,Import,Mean,2120.092519
+Djibouti,Import,Mean,28.1084544
+Egypt,Import,Mean,562.0562881
+Eq. Guinea,Import,Mean,644.5459311
+Ethiopia,Import,Mean,206.6436221
+Gabon,Import,Mean,1668.674134
+Gambia,Import,Mean,17.926142
+Ghana,Import,Mean,810.4594239
+Guinea,Import,Mean,1425.338066
+Guinea Bissau,Import,Mean,0.0008849
+Cote d'Ivoire,Import,Mean,326.6055526
+Kenya,Import,Mean,103.2692987
+Liberia,Import,Mean,43.7450277
+Libyan,Import,Mean,635.2917687
+Madagascar,Import,Mean,84.0243487
+Malawi,Import,Mean,3.0735148
+Mali,Import,Mean,81.9345849
+Mauritania,Import,Mean,808.8472476
+Mauritius,Import,Mean,18.7352789
+Morocco,Import,Mean,379.0876987
+Mozambique,Import,Mean,378.0440283
+Namibia,Import,Mean,267.6081542
+Niger,Import,Mean,142.6155041
+Nigeria,Import,Mean,1646.219124
+Reunion,Import,Mean,0.0145913
+Rwanda,Import,Mean,17.0705031
+Sao Tome & Principe,Import,Mean,0.0448881
+Senegal,Import,Mean,105.6118092
+Seychelles,Import,Mean,0.0261584
+Sierra Leone,Import,Mean,103.6192849
+Somalia,Import,Mean,4.77479
+South Africa,Import,Mean,14325.87603
+Western Sahara,Import,Mean,1.10E-06
+Sudan,Import,Mean,455.7566701
+Tanzania,Import,Mean,335.3080788
+Togo,Import,Mean,98.3995998
+Tunisia,Import,Mean,136.0603699
+Uganda,Import,Mean,23.0288549
+Burkina Faso,Import,Mean,66.8484364
+Democratic of Congo,Import,Mean,4925.394745
+Zambia,Import,Mean,2308.377053
+Zimbabwe,Import,Mean,258.179522
+Lesotho,Import,Mean,11.3146285
+Melilla,Import,Mean,0.0105667
+Swaziland,Import,Mean,0.2646076
+Eritrea,Import,Mean,193.9411678
+Mayotte,Import,Mean,0.0052774
+South Sudan,Import,Mean,329.0673049
+Other,Import,Mean,0.0156066
+Belgium,Import,Mean,5023.729758
+Denmark,Import,Mean,3566.827343
+United Kingdom,Import,Mean,12576.86227
+Germany,Import,Mean,66404.12123
+France,Import,Mean,19907.25838
+Ireland,Import,Mean,8619.156835
+Italy,Import,Mean,15571.45632
+Luxembourg,Import,Mean,162.7251517
+Netherlands,Import,Mean,7571.933163
+Greece,Import,Mean,488.5416401
+Portugal,Import,Mean,1935.825697
+Spain,Import,Mean,6475.741346
+Albania,Import,Mean,61.5944789
+Andorra,Import,Mean,0.1729863
+Austria,Import,Mean,4031.985587
+Bulgaria,Import,Mean,881.4591268
+Finland,Import,Mean,2468.435022
+Gibraltar,Import,Mean,0.0013429
+Hungary,Import,Mean,2838.295958
+Iceland,Import,Mean,56.3184792
+Liechtenstein,Import,Mean,73.5500506
+Malta,Import,Mean,254.0886902
+Monaco,Import,Mean,10.0523553
+Norway,Import,Mean,4505.51287
+Poland,Import,Mean,2840.242203
+Romania,Import,Mean,1792.678495
+San Marino,Import,Mean,2.4674956
+Sweden,Import,Mean,5429.076669
+Switzerland,Import,Mean,10468.62217
+Estonia,Import,Mean,185.1784331
+Latvia,Import,Mean,122.7205708
+Lithuania,Import,Mean,277.4067611
+Georgia,Import,Mean,76.2299011
+Armenia,Import,Mean,461.1425804
+Azerbaijan,Import,Mean,358.9532106
+Belarus,Import,Mean,603.7671141
+Moldova,Import,Mean,44.1898467
+Russia,Import,Mean,33958.83552
+Ukraine,Import,Mean,5210.50337
+Slovenia,Import,Mean,323.5415366
+Croatia,Import,Mean,93.414091
+Czech Republic,Import,Mean,3291.587096
+Slovakia,Import,Mean,4424.058167
+North Macedonia,Import,Mean,197.3932093
+Bosnia and Hercegovina,Import,Mean,58.194488
+Vatican City State,Import,Mean,0.0031081
+Faroe Islands,Import,Mean,30.6459252
+Serbia,Import,Mean,316.9529548
+Montenegro,Import,Mean,22.7823853
+Other,Import,Mean,0.1541044
+Antigua & Barbuda,Import,Mean,0.3048858
+Argentina,Import,Mean,3756.763997
+Aruba,Import,Mean,0.0034029
+The Bahamas,Import,Mean,48.9543432
+Barbados,Import,Mean,9.0920267
+Belize,Import,Mean,0.2598736
+Bolivia,Import,Mean,188.8287149
+Bonaire,Import,Mean,0.0001045
+Brazil,Import,Mean,50342.37175
+Cayman Islands,Import,Mean,0.0081182
+Chile,Import,Mean,18361.67753
+Colombia,Import,Mean,2273.548848
+Dominica,Import,Mean,0.9966651
+Costa Rica,Import,Mean,381.1250784
+Cuba,Import,Mean,224.7203498
+Curacao,Import,Mean,0.0019213
+Dominican Republic,Import,Mean,184.5731833
+Ecuador,Import,Mean,2588.572673
+French Guiana,Import,Mean,0.0132892
+Grenada,Import,Mean,0.0289689
+Guadeloupe,Import,Mean,0.0071361
+Guatemala,Import,Mean,199.1685963
+Guyana,Import,Mean,180.982185
+Haiti,Import,Mean,1.896729
+Honduras,Import,Mean,28.6055438
+Jamaica,Import,Mean,13.6983592
+Martinique,Import,Mean,0.0818433
+Mexico,Import,Mean,10018.66413
+Montserrat,Import,Mean,0.00227
+Nicaragua,Import,Mean,9.6611729
+Panama,Import,Mean,315.4726118
+Paraguay,Import,Mean,7.528907
+Peru,Import,Mean,9429.494361
+Puerto Rico,Import,Mean,703.6804055
+Saba,Import,Mean,0
+Saint Lucia,Import,Mean,0.0579668
+Saint Martin (French),Import,Mean,0.0568807
+Saint Vincent and the Grenadines,Import,Mean,0.0058577
+El Salvador,Import,Mean,111.873333
+Suriname,Import,Mean,29.155943
+Trinidad & Tobago,Import,Mean,119.0562248
+Turks & Caicos Islands,Import,Mean,0.0456805
+Uruguay,Import,Mean,1480.628572
+Venezuela,Import,Mean,429.4256483
+British Virgin Islands,Import,Mean,0.0187483
+Saint Kitts and Nevis,Import,Mean,0.2828747
+St. Pierre & Miquelon,Import,Mean,0.0004913
+Netherlands Antilles,Import,Mean,0.0039662
+Other,Import,Mean,0.1164949
+Canada,Import,Mean,14270.66305
+United States,Import,Mean,93034.44582
+Greenland,Import,Mean,141.8342534
+Bermuda,Import,Mean,0.0022229
+Other,Import,Mean,0.0026926
+Australia,Import,Mean,71803.95953
+Cook Islands,Import,Mean,1.3593227
+Fiji,Import,Mean,17.553038
+Gambier Islands,Import,Mean,0.0001177
+Marquesas Islands,Import,Mean,2.08E-05
+Nauru,Import,Mean,0.0619724
+New Caledonia,Import,Mean,617.2291056
+Vanuatu,Import,Mean,4.5544857
+New Zealand,Import,Mean,7508.752448
+Norfolk Islands,Import,Mean,0.0040919
+Papua New Guinea,Import,Mean,1259.372551
+Society Islands,Import,Mean,0
+Solomon Islands,Import,Mean,179.460056
+Tonga,Import,Mean,0.0232627
+Tuamotu Islands,Import,Mean,0
+Tubai Islands,Import,Mean,0
+Samoa,Import,Mean,0.3458468
+Kiribati,Import,Mean,0.0005684
+Tuvalu,Import,Mean,0.0055898
+Micronesia,Import,Mean,5.5911295
+Marshall Islands,Import,Mean,3.5221743
+Palau,Import,Mean,0.0048207
+French Polynesia,Import,Mean,2.9487017
+Wallis & Futuna,Import,Mean,0.0025573
+Other,Import,Mean,0.2970629
