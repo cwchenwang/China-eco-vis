@@ -26,6 +26,9 @@
     <p style='font-size: 18pt; text-align: center;'>World Trade Heat Map</p>
     <svg width="1000" height="600" id="world-map-svg" class="svgs"
         style='display: block; margin: 0 auto; border:rgb(85, 85, 85); border-style: solid; border-width: 1px;'></svg>
+
+    <svg width="1000" height="600" id="china-map-svg" class="svgs"
+        style='display: block; margin: 0 auto; border:rgb(85, 85, 85); border-style: solid; border-width: 1px;'></svg>
     <footer>
         <p>© Copyright 2021 </p>
     </footer>
@@ -37,10 +40,17 @@
 
         const barSvg = d3.select('#world-race-svg');
         const worldMapSvg = d3.select('#world-map-svg');
+        const chinaSvg = d3.select('#china-map-svg');
+
+        const removeDup = a => {
+            return a.filter((elem, pos) => {
+                return a.indexOf(elem) == pos;
+            })
+        }
 
         const formatFloat = d3.format(".2f");
 
-        let geo, geoData, boundaries, wholeMonthData, regionData, countries;
+        let geo, geoData, boundaries, wholeMonthData, regionData, countries, chinaGeo, chinaData;
         const dataLoadandSetup = async function () {
             geo = await d3.json('data/worldmap/geoData.geojson');
             //console.log(geo.features);
@@ -51,6 +61,9 @@
             //console.log(monthData);
             meanData = await d3.csv('data/worldmap/global-mean.csv');
             regionData = await d3.csv('data/worldmap/global-by-region.csv');
+
+            chinaGeo = await d3.json('data/chinamap/china.geojson');
+            chinaData = await d3.csv('data/chinamap/china_all.csv')
         }
 
         async function renderBarRacing(data) {
@@ -309,13 +322,180 @@
                         .style('fill', (d) => d.properties.fillColor);
                 });
         }
+
+        async function renderChinaMap() {
+            // const minValue = Math.min.apply(Math, meanData.map(d => parseFloat(d.number)));
+            // const maxValue = Math.max.apply(Math, meanData.map(d => parseFloat(d.number)));
+            // meanData = d3.group(meanData, d => d.country);
+            // const paletteScale = d3.scaleLinear()
+            //     .domain([minValue, maxValue])
+            //     .range(['#EFEFFF', '#CF4646']);
+
+            const provinces = removeDup(chinaData.map(d => d.province));
+            const years = removeDup(chinaData.map(d => d.year));
+
+            let proMean = provinces.map(province => {
+                return {
+                    province: province,
+                    mean: chinaData.filter(d => d.province == province).map(d => Number(d.total)).reduce((a, b) => a + b),
+                }
+            });
+
+            console.log(proMean);
+
+            const paletteScale = d3.scaleLinear()
+                .domain(d3.extent(proMean.map(d => d.mean)))
+                .range(['#EFEFFF', '#CF4646']);
+
+            // let proData = chinaGeo.features.map(
+
+            // )
+
+            // geoData = geoData.map(country => {
+            //     const meanValue = meanData.get(country.properties.name);
+            //     if (typeof meanValue != 'undefined') {
+            //         const average = arr => arr.reduce((p, c) => { return parseFloat(p.number) + parseFloat(c.number) }) / arr.length;
+            //         const result = formatFloat(average(meanValue));
+            //         return {
+            //             ...country,
+            //             properties: {
+            //                 total: result,
+            //                 fillColor: paletteScale(result),
+            //                 name: country.properties.name,
+            //             }
+            //         }
+            //     }
+            //     let fill = "rgb(220, 220, 220)";
+            //     if (country.properties.name == "China") {
+            //         fill = "rgb(255, 0, 0)";
+            //     }
+            //     return {
+            //         ...country,
+            //         properties: {
+            //             total: "No data available",
+            //             fillColor: fill,
+            //             name: country.properties.name,
+            //         }
+            //     }
+            // });
+
+
+            console.log(geoData);
+
+
+
+            var selectedLayer = chinaSvg.append('g').attr('class', 'selected-provinces');
+            var layer = chinaSvg.append('g').attr('class', 'provinces');
+            const projection = d3.geoMercator()
+                .fitSize([width, height], chinaGeo)
+                .scale(160)
+                .translate([width / 3, height / 2]);
+            // console.log(projection([116.418757, 39.917544]));
+            const path = d3.geoPath().projection(projection);
+
+            // zooming
+            const zoomed = ({ transform }) => {
+                layer.attr('transform', transform);
+                selectedLayer.attr('transform', transform);
+            };
+            chinaSvg.call(d3.zoom().scaleExtent([0.5, 10]).on('zoom', zoomed));
+
+            // draw world map
+
+            layer.selectAll('path').data(chinaGeo.features, (d) => d.properties.id).join('path')
+                .attr('class', d => `province ${d.properties.id}`)
+                .attr('d', path)
+                // .style('fill', d => )
+                .style('stroke', 'black')
+                .style('stroke-width', 1)
+                .style('fill', 'none');
+                    // enter => {
+                    //     enter
+                    //         .append('path')
+                    //         .attr('class', (d) => `country ${d.id}`)
+                    //         .attr('d', path)
+                    //         .style('fill', (d) => d.properties.fillColor)
+                    //         .style('stroke', 'none');
+                    // },
+                    // () => { },
+                    // exit => {
+                    //     exit
+                    //         .remove();
+                    // },
+                // );
+
+            // draw boundaries
+            // layer.selectAll('.country-boundary')
+            //     .data([boundaries])
+            //     .join(
+            //         enter => {
+            //             enter
+            //                 .append('path')
+            //                 .attr('d', path)
+            //                 .attr('class', 'country-boundary')
+            //                 .style('stroke', 'black')
+            //                 .style('stroke-width', 1)
+            //                 .style('stroke-opacity', 0.3)
+            //                 .style('fill', 'none');
+            //         },
+            //         () => { },
+            //         exit => {
+            //             exit.remove()
+            //         }
+            //     );
+
+            // var tooltipSelection = d3.select('body')
+            //     .append('div')
+            //     .attr('class', 'hover-info')
+            //     .style('visibility', 'hidden');
+
+            // d3.selectAll(".country")
+            //     .on('mouseenter', ({ target }) => {
+            //         tooltipSelection.style('visibility', 'visible');
+            //         d3.select(target)
+            //             .transition()
+            //             .duration(150)
+            //             .ease(d3.easeCubic)
+            //             .style('fill', '#ffba08');
+            //     })
+            //     .on('mousemove', ({ pageX, pageY, target }) => {
+            //         var html;
+            //         if (target.__data__.properties.total != "No data available") {
+            //             html = `<strong>${target.__data__.properties.name
+            //                 }</strong><br>Total Value: <br><strong>${target.__data__.properties.total
+            //                 } mn</strong>`;
+            //         } else {
+            //             html = `<strong>${target.__data__.properties.name
+            //                 }</strong><br>Total Value: <br><strong>N/A</strong>`;
+            //         }
+            //         tooltipSelection
+            //             .style('top', `${pageY + 20}px`)
+            //             .style('left', `${pageX - 10}px`)
+            //             .style('z-index', 100)
+            //             .html(html)
+            //             .append('div')
+            //             .attr('class', 'triangle');
+            //         d3.selectAll('.triangle').style('top', `${-Math.sqrt(20) - 3}px`);
+            //     })
+            //     .on('mouseleave', (e) => {
+            //         tooltipSelection.style('visibility', 'hidden');
+            //         d3.select(e.target)
+            //             .transition()
+            //             .duration(150)
+            //             .ease(d3.easeCubic)
+            //             .style('fill', (d) => d.properties.fillColor);
+            //     });
+        }
+
+
+
         const render = async function () {
             await dataLoadandSetup();
 
             renderBarRacing(wholeMonthData);
             renderPieChart(regionData);
             renderMap();
-
+            renderChinaMap();
         }
         render();
     </script>
