@@ -337,52 +337,41 @@
             let proMean = provinces.map(province => {
                 return {
                     province: province,
-                    mean: chinaData.filter(d => d.province == province).map(d => Number(d.total)).reduce((a, b) => a + b),
+                    mean: chinaData.filter(d => d.province == province).map(d => +d.total).reduce((a, b) => a + b),
                 }
             });
-
-            console.log(proMean);
 
             const paletteScale = d3.scaleLinear()
                 .domain(d3.extent(proMean.map(d => d.mean)))
                 .range(['#EFEFFF', '#CF4646']);
+            
+            proMean = d3.group(proMean, d => d.province);
+            let proIndusMap = d3.group(chinaData, d => d.province);
 
-            // let proData = chinaGeo.features.map(
+            let provinceData = chinaGeo.features.map(province => {
+                const name = province.properties.name;
+                const meanValue = proMean.get(name);
+                if (typeof meanValue != 'undefined') {
+                    return {
+                        ...province,
+                        properties: {
+                            ...province.properties,
+                            indus: proIndusMap.get(name),
+                            fillColor: paletteScale(meanValue[0].mean),
+                        }
+                    };
+                }
+                return {
+                    ...province,
+                    properties: {
+                        ...province.properties,
+                        indus: undefined,
+                        fillColor: 'rgb(220, 220, 220)',
+                    }
+                };
+            })
 
-            // )
-
-            // geoData = geoData.map(country => {
-            //     const meanValue = meanData.get(country.properties.name);
-            //     if (typeof meanValue != 'undefined') {
-            //         const average = arr => arr.reduce((p, c) => { return parseFloat(p.number) + parseFloat(c.number) }) / arr.length;
-            //         const result = formatFloat(average(meanValue));
-            //         return {
-            //             ...country,
-            //             properties: {
-            //                 total: result,
-            //                 fillColor: paletteScale(result),
-            //                 name: country.properties.name,
-            //             }
-            //         }
-            //     }
-            //     let fill = "rgb(220, 220, 220)";
-            //     if (country.properties.name == "China") {
-            //         fill = "rgb(255, 0, 0)";
-            //     }
-            //     return {
-            //         ...country,
-            //         properties: {
-            //             total: "No data available",
-            //             fillColor: fill,
-            //             name: country.properties.name,
-            //         }
-            //     }
-            // });
-
-
-            console.log(geoData);
-
-
+            console.log(provinceData);
 
             var selectedLayer = chinaSvg.append('g').attr('class', 'selected-provinces');
             var layer = chinaSvg.append('g').attr('class', 'provinces');
@@ -390,7 +379,6 @@
                 .fitSize([width, height], chinaGeo)
                 .scale(160)
                 .translate([width / 3, height / 2]);
-            // console.log(projection([116.418757, 39.917544]));
             const path = d3.geoPath().projection(projection);
 
             // zooming
@@ -400,93 +388,59 @@
             };
             chinaSvg.call(d3.zoom().scaleExtent([0.5, 10]).on('zoom', zoomed));
 
-            // draw world map
-
-            layer.selectAll('path').data(chinaGeo.features, (d) => d.properties.id).join('path')
+            layer.selectAll('path').data(provinceData, (d) => d.properties.id).join('path')
                 .attr('class', d => `province ${d.properties.id}`)
                 .attr('d', path)
-                // .style('fill', d => )
+                .style('fill', d => d.properties.fillColor)
+                .style('stroke-width', 0.5)
                 .style('stroke', 'black')
-                .style('stroke-width', 1)
-                .style('fill', 'none');
-                    // enter => {
-                    //     enter
-                    //         .append('path')
-                    //         .attr('class', (d) => `country ${d.id}`)
-                    //         .attr('d', path)
-                    //         .style('fill', (d) => d.properties.fillColor)
-                    //         .style('stroke', 'none');
-                    // },
-                    // () => { },
-                    // exit => {
-                    //     exit
-                    //         .remove();
-                    // },
-                // );
+                .style('stroke-opacity', 0.3)
 
-            // draw boundaries
-            // layer.selectAll('.country-boundary')
-            //     .data([boundaries])
-            //     .join(
-            //         enter => {
-            //             enter
-            //                 .append('path')
-            //                 .attr('d', path)
-            //                 .attr('class', 'country-boundary')
-            //                 .style('stroke', 'black')
-            //                 .style('stroke-width', 1)
-            //                 .style('stroke-opacity', 0.3)
-            //                 .style('fill', 'none');
-            //         },
-            //         () => { },
-            //         exit => {
-            //             exit.remove()
-            //         }
-            //     );
+            var tooltipSelection = d3.select('body')
+                .append('div')
+                .attr('class', 'hover-info')
+                .style('visibility', 'hidden');
 
-            // var tooltipSelection = d3.select('body')
-            //     .append('div')
-            //     .attr('class', 'hover-info')
-            //     .style('visibility', 'hidden');
-
-            // d3.selectAll(".country")
-            //     .on('mouseenter', ({ target }) => {
-            //         tooltipSelection.style('visibility', 'visible');
-            //         d3.select(target)
-            //             .transition()
-            //             .duration(150)
-            //             .ease(d3.easeCubic)
-            //             .style('fill', '#ffba08');
-            //     })
-            //     .on('mousemove', ({ pageX, pageY, target }) => {
-            //         var html;
-            //         if (target.__data__.properties.total != "No data available") {
-            //             html = `<strong>${target.__data__.properties.name
-            //                 }</strong><br>Total Value: <br><strong>${target.__data__.properties.total
-            //                 } mn</strong>`;
-            //         } else {
-            //             html = `<strong>${target.__data__.properties.name
-            //                 }</strong><br>Total Value: <br><strong>N/A</strong>`;
-            //         }
-            //         tooltipSelection
-            //             .style('top', `${pageY + 20}px`)
-            //             .style('left', `${pageX - 10}px`)
-            //             .style('z-index', 100)
-            //             .html(html)
-            //             .append('div')
-            //             .attr('class', 'triangle');
-            //         d3.selectAll('.triangle').style('top', `${-Math.sqrt(20) - 3}px`);
-            //     })
-            //     .on('mouseleave', (e) => {
-            //         tooltipSelection.style('visibility', 'hidden');
-            //         d3.select(e.target)
-            //             .transition()
-            //             .duration(150)
-            //             .ease(d3.easeCubic)
-            //             .style('fill', (d) => d.properties.fillColor);
-            //     });
+            d3.selectAll(".province")
+                .on('click', (event, d) => {
+                    console.log(d)
+                })
+                .on('mouseenter', ({ target }) => {
+                    tooltipSelection.style('visibility', 'visible');
+                    d3.select(target)
+                        .transition()
+                        .duration(150)
+                        .ease(d3.easeCubic)
+                        .style('fill', '#ffba08');
+                })
+                .on('mousemove', ({ pageX, pageY, target }) => {
+                    var html;
+                    if (typeof target.__data__.properties.indus != 'undefined') {
+                        html = `<strong>${target.__data__.properties.name
+                            }</strong><br>Click for detail`;
+                    } else {
+                        html = `<strong>${target.__data__.properties.name
+                            }</strong><br>N/A`;
+                    }
+                    tooltipSelection
+                        .style('top', `${pageY + 20}px`)
+                        .style('left', `${pageX - 10}px`)
+                        .style('z-index', 100)
+                        .html(html)
+                        .append('div')
+                        .attr('class', 'pro-triangle');
+                    d3.selectAll('.pro-triangle').style('top', `${-Math.sqrt(20) - 3}px`);
+                })
+                .on('mouseleave', (e) => {
+                    tooltipSelection.style('visibility', 'hidden');
+                    d3.select(e.target)
+                        .transition()
+                        .duration(150)
+                        .ease(d3.easeCubic)
+                        .style('fill', (d) => d.properties.fillColor);
+                });
+            
         }
-
 
 
         const render = async function () {
