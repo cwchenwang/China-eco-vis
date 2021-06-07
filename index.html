@@ -12,7 +12,8 @@
 </head>
 
 <body>
-    <p style='font-size: 30pt; text-align: center;'>China International Trade Visualization</p>
+    <p style='font-size: 40pt; text-align: center;'>China Economy Visualization</p>
+    <p style='font-size: 30pt; text-align: center;'>International Trade</p>
     <div style="display: block; height: 400px; margin: 20px;">
         <svg width="800" height="400" id="world-race-svg" class="svgs"></svg>
         <div style="display: inline-block; height:400px; width: 500px; vertical-align: bottom;">
@@ -27,11 +28,15 @@
     <p style='font-size: 18pt; text-align: center;'>World Trade Heat Map</p>
     <svg width="1000" height="600" id="world-map-svg" class="svgs"
         style='display: block; margin: 0 auto; border:rgb(85, 85, 85); border-style: solid; border-width: 1px;'></svg>
-    <svg width="1000" height="600" id="china-map-svg" class="svgs"
-        style='display: block; margin: 0 auto; border:rgb(85, 85, 85); border-style: solid; border-width: 1px;'></svg>
-    <svg width="1000" height="600" id="stackbar" class="svgs"
-        style='display: block; margin: 0 auto; border:rgb(85, 85, 85); border-style: solid; border-width: 1px;'></svg>
-    
+    <p style='font-size: 30pt; text-align: center; margin-top: 20px; margin-bottom: 10px;'>Domestic Development</p>
+    <p style='font-size: 18pt; text-align: center; margin: 10px auto;'>GDP Heatmap and Sector Proportion</p>
+    <div style="display: block; margin: 0 auto; text-align: center;">
+        <svg width="600" height="400" id="china-map-svg" class="svgs"
+            style='display: inline-block; border:rgb(85, 85, 85); border-style: solid; border-width: 1px;'></svg>
+        <svg width="500" height="400" id="stackbar" class="svgs"
+            style='display: inline-block; border:rgb(85, 85, 85); border-style: solid; border-width: 1px;'></svg>
+    </div>
+
     <footer>
         <p>© Copyright 2021 </p>
     </footer>
@@ -332,10 +337,11 @@
             console.log('draw stack bar')
             indusData = data.properties.indus
             name = data.properties.name
+            console.log(name);
 
             const width = stackBarSvg.attr('width');
             const height = stackBarSvg.attr('height');
-            const margin = {top: 50, right: 50, bottom: 50, left: 50};
+            const margin = { top: 50, right: 50, bottom: 50, left: 50 };
 
             const transition = d3.transition().duration(1000).ease(d3.easeLinear);
             let stack = d3.stack().keys(chinaData.columns.slice(2, 5)).order(d3.stackOrderAscending).offset(d3.stackOffsetNone);
@@ -347,31 +353,42 @@
             const xScale = d3.scaleBand().domain(indusData.map(d => d.year)).range([margin.left, width - margin.right]).padding(0.1)
 
             stackGroup.selectAll('g')
-              .data(series)
-              .join('g').attr('fill', d => color(d.key))
-              .selectAll('rect')
-              .data(d => d)
-              .join('rect')
-              .attr('x', (d, i) => xScale(d.data.year))
-              .attr('width', xScale.bandwidth())
-              .transition().duration(1000)
-              .attr("y", d => yScale(d[1]))
-              .attr("height", d => yScale(d[0]) - yScale(d[1]))
-            
+                .data(series)
+                .join('g').attr('fill', d => color(d.key))
+                .selectAll('rect')
+                .data(d => d)
+                .join('rect')
+                .attr('x', (d, i) => xScale(d.data.year))
+                .attr('width', xScale.bandwidth())
+                .transition().duration(1000)
+                .attr("y", d => yScale(d[1]))
+                .attr("height", d => yScale(d[0]) - yScale(d[1]))
+
+
+            const xScale1 = d3.scaleBand().domain(indusData.map(d => d.year.slice(2))).range([margin.left, width - margin.right]).padding(0.1)
             // const xAxis
             const yAxis = g => g.attr('transform', `translate(${margin.left}, 0)`)
-                                .call(d3.axisLeft(yScale).ticks(null, 's'))
-                                .call(g => g.selectAll('.domain').remove())
+                .call(d3.axisLeft(yScale).ticks(null, 's'))
+                .call(g => g.selectAll('.domain').remove())
 
             const xAxis = g => g.attr('transform', `translate(0, ${height - margin.bottom})`)
-                                .call(d3.axisBottom(xScale).tickSizeOuter(0))
-                                .call(g => g.selectAll('.domain').remove())
-            
+                .call(d3.axisBottom(xScale1).tickSizeOuter(0))
+                .call(g => g.selectAll('.domain').remove())
+
             // stackBarSvg.select('#yaxis').transition(transition).call(yAxis);
             // stackBarSvg.select('#xaxis').transition(transition).call(xAxis);
 
             stackBarSvg.select('#yaxis').call(yAxis);
             stackBarSvg.select('#xaxis').call(xAxis);
+
+            stackBarSvg.select('.province-name').remove();
+            stackBarSvg.append('g').append('text').text(name)
+                .attr('font-size', '10pt')
+                .attr('x', width / 2)
+                .attr('y', height - 10)
+                .attr('font-weight', 'bold')
+                .attr('text-anchor', 'middle')
+                .attr('class', 'province-name');
 
             // let leg = legend({color, title: 'Industry'});
 
@@ -379,7 +396,7 @@
             // console.log(series.map(d => d.key))
             let dom = series.map(d => d.key)
             const leg = d3.scaleOrdinal().domain(['第一产业', '第二产业', '第三产业']).range(d3.schemeSpectral[series.length]).unknown('#ccc')
-            stackBarSvg.append(() => {return legend({color: leg})})
+            stackBarSvg.append(() => { return legend({ color: leg }) })
         }
 
 
@@ -404,7 +421,7 @@
             const paletteScale = d3.scaleLinear()
                 .domain(d3.extent(proMean.map(d => d.mean)))
                 .range(['#EFEFFF', '#CF4646']);
-            
+
             proMean = d3.group(proMean, d => d.province);
             let proIndusMap = d3.group(chinaData, d => d.province);
 
@@ -433,12 +450,13 @@
 
             console.log(provinceData);
 
+            const width = chinaSvg.attr('width'), height = chinaSvg.attr('height');
             var selectedLayer = chinaSvg.append('g').attr('class', 'selected-provinces');
             var layer = chinaSvg.append('g').attr('class', 'provinces');
             const projection = d3.geoMercator()
                 .fitSize([width, height], chinaGeo)
-                .scale(160)
-                .translate([width / 3, height / 2]);
+                .scale(490)
+                .translate([-width, 1.38 * height]);
             const path = d3.geoPath().projection(projection);
 
             // zooming
@@ -508,6 +526,13 @@
         function initStackBar() {
             let yAxisGroup = stackBarSvg.append('g').attr('id', 'yaxis');
             let xAxisGroup = stackBarSvg.append('g').attr('id', 'xaxis');
+            stackBarSvg.append('g').append('text').text('Click Map to show Detail')
+                .attr('class', 'province-name')
+                .attr('font-size', '20pt')
+                .attr('x', stackBarSvg.attr('width') / 2)
+                .attr('y', stackBarSvg.attr('height') / 2)
+                .attr('font-weight', 'bold')
+                .attr('text-anchor', 'middle');
         }
 
 
